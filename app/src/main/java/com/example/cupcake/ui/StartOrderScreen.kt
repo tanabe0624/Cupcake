@@ -48,7 +48,8 @@ import com.example.cupcake.ui.theme.CupcakeTheme
  */
 @Composable
 fun StartOrderScreen(
-    quantityOptions: List<Pair<Int, Int>>,
+    quantityOptions: List<Pair<Int, Int>>,//1 つ目の Int は、各ボタンに表示する文字列のリソース ID です。2 つ目の Int は、カップケーキの実際の数量
+    onNextButtonClicked: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -83,7 +84,7 @@ fun StartOrderScreen(
             quantityOptions.forEach { item ->
                 SelectQuantityButton(
                     labelResourceId = item.first,
-                    onClick = {}
+                    onClick = {onNextButtonClicked(item.second)}
                 )
             }
         }
@@ -114,6 +115,7 @@ fun StartOrderPreview() {
     CupcakeTheme {
         StartOrderScreen(
             quantityOptions = DataSource.quantityOptions,
+            onNextButtonClicked = {},
             modifier = Modifier
                 .fillMaxSize()
                 .padding(dimensionResource(R.dimen.padding_medium))
